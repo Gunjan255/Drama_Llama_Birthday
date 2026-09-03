@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#100914">
+  <title>For {{ her_name }} ❤️</title>
+  <meta name="description" content="A little birthday surprise for {{ her_name }}.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="noise"></div>
+  <div id="hearts"></div>
+
+  <header class="nav">
+    <div class="brand">D<span>♥</span>L</div>
+    <div class="nav-date">{{ birthday }}</div>
+  </header>
+
+  <main>
+    <section class="hero reveal">
+      <div class="hero-photo">
+        <img src="{{ url_for('static', filename='images/her_evening.jpeg') }}" alt="A favorite portrait">
+        <div class="photo-glow"></div>
+      </div>
+      <div class="hero-copy">
+        <p class="eyebrow">A little something, made just for you</p>
+        <h1>Happy Birthday,<br><em>{{ her_name }}</em> ❤️</h1>
+        <p class="hero-line">Some people become a part of your life.<br>
+          You somehow became a part of <strong>mine.</strong></p>
+        <button class="primary-btn" id="openBtn">Open your surprise <span>↓</span></button>
+      </div>
+    </section>
+
+    <section class="intro section reveal">
+      <p class="eyebrow">01 · How it all started</p>
+      <h2>It started with something as simple as <em>social media.</em></h2>
+      <div class="intro-grid">
+        <p>Neither of us probably knew where a few conversations would lead. But somewhere between messages, silly moments, arguments, laughter and everything in between, you became someone I couldn't just call "someone."</p>
+        <p>You became <strong>you.</strong><br><br>And that's the part I love most — our story doesn't need to look like anybody else's to mean everything to me.</p>
+      </div>
+    </section>
+
+    <section class="gallery section reveal">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">02 · The girl I get to know</p>
+          <h2>Beautiful in every version of you.</h2>
+        </div>
+        <p class="section-note">A few frames. A thousand feelings.</p>
+      </div>
+
+      <div class="masonry">
+        <figure class="card card-large">
+          <img src="{{ url_for('static', filename='images/puri_solo.jpeg') }}" alt="Portrait at Puri">
+          <figcaption>Puri — one of those days I'll remember.</figcaption>
+        </figure>
+        <figure class="card">
+          <img src="{{ url_for('static', filename='images/her_riverside.jpeg') }}" alt="Portrait by the water">
+          <figcaption>Your quiet side.</figcaption>
+        </figure>
+        <figure class="card">
+          <img src="{{ url_for('static', filename='images/her_evening.jpeg') }}" alt="Evening portrait">
+          <figcaption>Your chaos has good lighting too. 😉</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="puri section reveal">
+      <div class="puri-image">
+        <img src="{{ url_for('static', filename='images/puri_together.jpeg') }}" alt="Together at Puri">
+      </div>
+      <div class="puri-copy">
+        <p class="eyebrow">03 · Our Puri chapter</p>
+        <h2>Not a perfect trip.<br><em>A perfect memory.</em></h2>
+        <p>Our first Puri trip with friends had almost everything a memorable trip could possibly have.</p>
+        <div class="memory-list">
+          <div><span>01</span><p>My phone decided to disappear. <small>Definitely not on the itinerary.</small></p></div>
+          <div><span>02</span><p>The Prasad from Lord Jagannath temple got lost somewhere in the auto journey. <small>Another unexpected plot twist.</small></p></div>
+          <div><span>03</span><p>And somehow, among all that mess, we made memories that don't belong to anyone else. <small>Some things only you and I know.</small></p></div>
+        </div>
+        <p class="private-note">There are moments from that trip I could never explain properly to anyone else — because they weren't meant for anyone else. They are simply <strong>ours.</strong></p>
+      </div>
+    </section>
+
+    <section class="letter section reveal">
+      <div class="letter-wrap">
+        <p class="eyebrow">04 · What I don't always say</p>
+        <h2>A letter, in my own language.</h2>
+        <div class="letter-body" id="letterBody">
+          <p>I know I may not express my love the way the rest of the world does.</p>
+          <p>I'm not always the person who can turn every feeling into perfect words, grand gestures or something that looks good from the outside.</p>
+          <p>But that never means I love you any less.</p>
+          <p>I love you in <em>my own language.</em></p>
+          <p>If my heart were code, you wouldn't just be a variable in my life. You'd be the constant I never want to change.</p>
+          <p>If my life were a program, you wouldn't be a feature I added. You'd be one of the reasons I keep running it.</p>
+          <p>And maybe that's what I want you to understand most:</p>
+          <p><strong>I may not love you like the rest of the world.<br>I love you like me.</strong></p>
+          <p>Completely. Honestly. Imperfectly. And in my own way.</p>
+          <p class="signature">— Yours, always ❤️</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="love section reveal">
+      <p class="eyebrow">05 · The thing I love most</p>
+      <h2>You are <em>absolute</em> in yourself.</h2>
+      <div class="love-card">
+        <div class="quote-mark">“</div>
+        <p>You have this incredible way of being completely yourself. And yes, sometimes you create a whole mess of yourself — but strangely, that's part of what I love about us.</p>
+        <p>Because I love being the person who tries to calm you down, puts the pieces together, and helps you feel whole again.</p>
+        <p>Not because you need fixing. <strong>You don't.</strong><br>
+        Because somewhere along the way, taking care of your chaos became one of my favorite feelings.</p>
+      </div>
+    </section>
+
+    <section class="song section reveal">
+      <div class="song-disc">♪</div>
+      <div>
+        <p class="eyebrow">06 · Press play on the feeling</p>
+        <h2>{{ song_title }}</h2>
+        <p>This one belongs in the soundtrack of this little surprise.</p>
+        <a class="song-btn" href="{{ song_url }}" target="_blank" rel="noopener">Listen to VALLAH ↗</a>
+      </div>
+    </section>
+
+    <section class="finale section reveal">
+      <div class="finale-photo">
+        <img src="{{ url_for('static', filename='images/puri_together.jpeg') }}" alt="A favorite memory together">
+      </div>
+      <div class="finale-copy">
+        <p class="eyebrow">07 · One last thing</p>
+        <h2>For all the days we've had,<br>and all the ones we haven't.</h2>
+        <p>I don't know what every chapter ahead will look like. But I know this: whatever happens, I'll always be grateful that a random social-media beginning brought <strong>you</strong> into my story.</p>
+        <div class="big-line">Happy Birthday,<br><em>my Drama Llama.</em> 🦙❤️</div>
+        <p class="last-line">I may not love you like the rest of the world.<br>
+          <strong>I love you like me.</strong><br>
+          And I hope you always feel that.</p>
+      </div>
+    </section>
+
+    <footer>
+      <p>Made with Python, a ridiculous amount of love, and a little bit of chaos.</p>
+      <span>♥</span>
+    </footer>
+  </main>
+
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
