@@ -1,111 +1,6 @@
-
 const openBtn = document.getElementById("openBtn");
 const heartLayer = document.getElementById("hearts");
 const birthdaySong = document.getElementById("birthdaySong");
-
-
-// =========================================
-// START LAAVAN
-// =========================================
-
-async function startBirthdaySong() {
-
-  if (!birthdaySong) {
-    console.log("❌ birthdaySong element not found");
-    return;
-  }
-
-  try {
-
-    birthdaySong.volume = 1.0;
-
-    await birthdaySong.play();
-
-    console.log("🎵 Laavan is playing!");
-
-  } catch (error) {
-
-    console.error("❌ Laavan could not start:", error);
-
-  }
-}
-
-
-// =========================================
-// MAIN WEBSITE OPEN BUTTON
-// =========================================
-
-if (openBtn) {
-
-  openBtn.addEventListener("click", async () => {
-
-    document
-      .querySelector(".intro")
-      .scrollIntoView({behavior:"smooth"});
-
-    burstHearts(28);
-
-    await startBirthdaySong();
-
-    fetch("/heartbeat", {
-      method:"POST"
-    }).catch(()=>{});
-
-  });
-
-}
-
-  if (birthdaySong) {
-    try {
-      await birthdaySong.play();
-    } catch (error) {
-      console.log("Laavan could not start:", error);
-    }
-  }
-
-  fetch("/heartbeat", {method:"POST"}).catch(()=>{});
-});
-function burstHearts(count){
-  for(let i=0;i<count;i++){
-    const h=document.createElement("span");
-    h.className="heart";
-    h.textContent=["♥","♡","❤","✦"][Math.floor(Math.random()*4)];
-    h.style.left=(15+Math.random()*70)+"%";
-    h.style.bottom=(8+Math.random()*18)+"%";
-    h.style.setProperty("--drift",(Math.random()*160-80)+"px");
-    h.style.animationDelay=(Math.random()*.7)+"s";
-    h.style.fontSize=(12+Math.random()*22)+"px";
-    heartLayer.appendChild(h);
-    setTimeout(()=>h.remove(),5500);
-  }
-}
-
-const observer = new IntersectionObserver((entries)=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.classList.add("visible");
-      observer.unobserve(entry.target);
-    }
-  });
-},{threshold:.12});
-
-document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
-
-// Tiny developer Easter egg: type "python" anywhere on the page.
-let typed="";
-window.addEventListener("keydown",(e)=>{
-  typed=(typed+e.key.toLowerCase()).slice(-6);
-  if(typed==="python"){
-    burstHearts(50);
-    document.body.animate(
-      [{filter:"brightness(1)"},{filter:"brightness(1.35)"},{filter:"brightness(1)"}],
-      {duration:900}
-    );
-  }
-});
-/* =========================================
-   DRAMA LLAMA — LIVE BIRTHDAY CELEBRATION
-   ========================================= */
 
 const birthdayCelebration =
   document.getElementById("birthdayCelebration");
@@ -120,7 +15,205 @@ const confettiLayer =
   document.getElementById("confettiLayer");
 
 
-/* Create confetti */
+// =========================================
+// LAAVAN MUSIC
+// =========================================
+
+function playLaavan() {
+
+  if (!birthdaySong) {
+    console.error("❌ birthdaySong not found");
+    return;
+  }
+
+  birthdaySong.currentTime = 0;
+  birthdaySong.volume = 1.0;
+
+  const playPromise = birthdaySong.play();
+
+  if (playPromise !== undefined) {
+
+    playPromise
+      .then(() => {
+        console.log("🎵 LAAVAN STARTED!");
+      })
+      .catch((error) => {
+        console.error("❌ LAAVAN FAILED:", error);
+      });
+
+  }
+}
+
+
+// =========================================
+// CONTINUE BUTTON
+// =========================================
+
+if (closeCelebration) {
+
+  closeCelebration.addEventListener("click", function () {
+
+    console.log("❤️ Continue button clicked");
+
+    // IMPORTANT:
+    // This is directly inside the user's click.
+    playLaavan();
+
+    // Hide birthday animation
+    if (birthdayCelebration) {
+      birthdayCelebration.classList.add("hidden");
+    }
+
+    // Start hearts
+    burstHearts(28);
+
+    // Notify Flask
+    fetch("/heartbeat", {
+      method: "POST"
+    }).catch(() => {});
+
+  });
+
+}
+
+
+// =========================================
+// MAIN OPEN BUTTON
+// =========================================
+
+if (openBtn) {
+
+  openBtn.addEventListener("click", function () {
+
+    console.log("❤️ Open surprise clicked");
+
+    document
+      .querySelector(".intro")
+      .scrollIntoView({
+        behavior: "smooth"
+      });
+
+    burstHearts(28);
+
+    // Keep music playing
+    if (birthdaySong && birthdaySong.paused) {
+      playLaavan();
+    }
+
+    fetch("/heartbeat", {
+      method: "POST"
+    }).catch(() => {});
+
+  });
+
+}
+
+
+// =========================================
+// HEARTS
+// =========================================
+
+function burstHearts(count) {
+
+  if (!heartLayer) return;
+
+  for (let i = 0; i < count; i++) {
+
+    const h = document.createElement("span");
+
+    h.className = "heart";
+
+    h.textContent =
+      ["♥", "♡", "❤", "✦"][
+        Math.floor(Math.random() * 4)
+      ];
+
+    h.style.left =
+      (15 + Math.random() * 70) + "%";
+
+    h.style.bottom =
+      (8 + Math.random() * 18) + "%";
+
+    h.style.setProperty(
+      "--drift",
+      (Math.random() * 160 - 80) + "px"
+    );
+
+    h.style.animationDelay =
+      (Math.random() * .7) + "s";
+
+    h.style.fontSize =
+      (12 + Math.random() * 22) + "px";
+
+    heartLayer.appendChild(h);
+
+    setTimeout(() => h.remove(), 5500);
+  }
+}
+
+
+// =========================================
+// SCROLL REVEALS
+// =========================================
+
+const observer =
+  new IntersectionObserver(
+    (entries) => {
+
+      entries.forEach(entry => {
+
+        if (entry.isIntersecting) {
+
+          entry.target.classList.add("visible");
+
+          observer.unobserve(entry.target);
+
+        }
+
+      });
+
+    },
+    { threshold: .12 }
+  );
+
+
+document
+  .querySelectorAll(".reveal")
+  .forEach(el => observer.observe(el));
+
+
+// =========================================
+// PYTHON EASTER EGG
+// =========================================
+
+let typed = "";
+
+window.addEventListener("keydown", (e) => {
+
+  typed =
+    (typed + e.key.toLowerCase()).slice(-6);
+
+  if (typed === "python") {
+
+    burstHearts(50);
+
+    document.body.animate(
+      [
+        { filter: "brightness(1)" },
+        { filter: "brightness(1.35)" },
+        { filter: "brightness(1)" }
+      ],
+      { duration: 900 }
+    );
+
+  }
+
+});
+
+
+// =========================================
+// BIRTHDAY CELEBRATION
+// =========================================
 
 function createConfetti(amount = 120) {
 
@@ -185,70 +278,25 @@ function createConfetti(amount = 120) {
 }
 
 
-/* Start celebration */
+// =========================================
+// START CELEBRATION
+// =========================================
 
 function startBirthdayCelebration() {
 
   if (!birthdayCelebration) return;
 
-  birthdayCelebration.classList.remove(
-    "hidden"
-  );
+  birthdayCelebration.classList.remove("hidden");
 
   createConfetti(140);
 
   burstHearts(45);
-
 }
 
 
-async function closeBirthdayCelebration() {
-
-  // Start Laavan because this function is triggered
-  // directly by her button click.
-  await startBirthdaySong();
-
-  if (!birthdayCelebration) return;
-
-  birthdayCelebration.classList.add("hidden");
-
-  fetch("/heartbeat", {
-    method: "POST"
-  }).catch(() => {});
-
-}
-
-
-/* Automatically celebrate when she opens
-   the website */
-
-window.addEventListener(
-  "load",
-  () => {
-
-    setTimeout(() => {
-
-      startBirthdayCelebration();
-
-    }, 700);
-
-  }
-);
-
-
-/* Continue */
-
-if (closeCelebration) {
-
-  closeCelebration.addEventListener(
-    "click",
-    closeBirthdayCelebration
-  );
-
-}
-
-
-/* Celebrate again */
+// =========================================
+// CELEBRATE AGAIN
+// =========================================
 
 if (celebrateBtn) {
 
@@ -258,3 +306,18 @@ if (celebrateBtn) {
   );
 
 }
+
+
+// =========================================
+// INITIAL CELEBRATION
+// =========================================
+
+window.addEventListener("load", () => {
+
+  setTimeout(() => {
+
+    startBirthdayCelebration();
+
+  }, 700);
+
+});
