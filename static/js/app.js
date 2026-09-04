@@ -332,3 +332,207 @@ window.addEventListener("load", () => {
   }, 700);
 
 });
+
+/* =========================================
+   CINEMATIC PHOTO LIGHTBOX
+   ========================================= */
+
+const photoLightbox =
+  document.getElementById("photoLightbox");
+
+const lightboxImage =
+  document.getElementById("lightboxImage");
+
+const lightboxClose =
+  document.getElementById("lightboxClose");
+
+const lightboxNumber =
+  document.getElementById("lightboxNumber");
+
+const lightboxTitle =
+  document.getElementById("lightboxTitle");
+
+const lightboxText =
+  document.getElementById("lightboxText");
+
+
+/* =========================================
+   PHOTO INFORMATION
+   ========================================= */
+
+const photoInfo = {
+
+  "Amrita_mandir.jpeg": {
+    number: "01 · MY BEAUTIFUL GIRL",
+    title: "A Moment of You",
+    text: "Somewhere between the moment and the memory, there was you. ❤️"
+  },
+
+  "puri_together.jpeg": {
+    number: "03 · OUR PURI CHAPTER",
+    title: "Not a Perfect Trip",
+    text: "A perfect memory doesn't need a perfect plan."
+  },
+
+  "Amrita_Family.jpeg": {
+    number: "04 · YOUR LITTLE WORLD",
+    title: "Family ❤️",
+    text: "Different opinions, different lives, different places — but one heart that always cares."
+  },
+
+  "Amrita_Friend.jpeg": {
+    number: "05 · THE FRIENDS CHAPTER",
+    title: "Just Keep Laughing ❤️",
+    text: "A horror movie, a little fear, and a lot of laughter with Rupkatha."
+  },
+
+  "Amrita_Everyone.jpeg": {
+    number: "06 · EVERYONE, TOGETHER",
+    title: "One Family. One Heart.",
+    text: "Everyone may live apart, but love has never needed the same address."
+  },
+
+  "Amrita_Pub.jpeg": {
+    number: "07 · A LITTLE MORE OF YOU",
+    title: "Those Eyes",
+    text: "One look, and suddenly the whole room disappears."
+  },
+
+  "Amrita_Wings.jpeg": {
+    number: "08 · A LITTLE MORE OF YOU",
+    title: "My Angel",
+    text: "Maybe the wings were in the background, but to me they always belonged to you."
+  },
+
+  "Amrita_Saree.jpeg": {
+    number: "09 · A LITTLE MORE OF YOU",
+    title: "Elegance, Unfiltered",
+    text: "Some beauty doesn't need anything extra."
+  }
+
+};
+
+
+/* =========================================
+   FIND ALL PHOTOS
+   ========================================= */
+
+const allPhotos =
+  document.querySelectorAll("img");
+
+
+allPhotos.forEach((image) => {
+
+  const imageSrc =
+    image.getAttribute("src") || "";
+
+  const fileName =
+    imageSrc.split("/").pop().split("?")[0];
+
+
+  if (!photoInfo[fileName]) {
+    return;
+  }
+
+
+  /* Make image clickable */
+
+  image.classList.add("clickable-photo");
+
+
+  image.addEventListener("click", () => {
+
+    const info =
+      photoInfo[fileName];
+
+
+    lightboxImage.src =
+      image.src;
+
+    lightboxImage.alt =
+      image.alt || info.title;
+
+
+    lightboxNumber.textContent =
+      info.number;
+
+    lightboxTitle.textContent =
+      info.title;
+
+    lightboxText.textContent =
+      info.text;
+
+
+    photoLightbox.classList.add("active");
+
+    document.body.style.overflow =
+      "hidden";
+
+  });
+
+});
+
+
+/* =========================================
+   CLOSE FUNCTION
+   ========================================= */
+
+function closePhotoLightbox() {
+
+  photoLightbox.classList.remove("active");
+
+  document.body.style.overflow =
+    "";
+
+}
+
+
+/* =========================================
+   CLOSE BUTTON
+   ========================================= */
+
+lightboxClose.addEventListener(
+  "click",
+  closePhotoLightbox
+);
+
+
+/* =========================================
+   CLICK OUTSIDE IMAGE
+   ========================================= */
+
+photoLightbox.addEventListener(
+  "click",
+  (event) => {
+
+    if (
+      event.target === photoLightbox
+    ) {
+
+      closePhotoLightbox();
+
+    }
+
+  }
+);
+
+
+/* =========================================
+   ESC KEY
+   ========================================= */
+
+document.addEventListener(
+  "keydown",
+  (event) => {
+
+    if (
+      event.key === "Escape" &&
+      photoLightbox.classList.contains("active")
+    ) {
+
+      closePhotoLightbox();
+
+    }
+
+  }
+);

@@ -2330,24 +2330,16 @@ footer span{color:var(--rose);font-size:20px}
    ========================================= */
 
 .everyone-memory-inner {
+  max-width: 1500px;
+  margin: auto;
 
-  max-width:
-    1350px;
+  display: grid;
 
-  margin:
-    auto;
+  grid-template-columns: 1.25fr .75fr;
 
-  display:
-    grid;
+  gap: 5vw;
 
-  grid-template-columns:
-    1.05fr .95fr;
-
-  gap:
-    7vw;
-
-  align-items:
-    center;
+  align-items: center;
 }
 
 
@@ -2388,40 +2380,29 @@ footer span{color:var(--rose);font-size:20px}
    ========================================= */
 
 .everyone-photo {
+  position: relative;
+  overflow: hidden;
 
-  position:
-    relative;
+  aspect-ratio: 16 / 10;
 
-  overflow:
-    hidden;
-
-  border-radius:
-    30px;
+  border-radius: 30px;
 
   box-shadow:
     0 40px 110px rgba(0,0,0,.45);
 
-  background:
-    #211321;
+  background: #211321;
 }
 
-
 .everyone-photo img {
+  width: 100%;
+  height: 100%;
 
-  width:
-    100%;
+  object-fit: cover;
+  object-position: center center;
 
-  height:
-    680px;
+  display: block;
 
-  object-fit:
-    cover;
-
-  display:
-    block;
-
-  transform:
-    scale(1.12);
+  transform: scale(1.04);
 
   filter:
     brightness(.70)
@@ -2452,39 +2433,21 @@ footer span{color:var(--rose);font-size:20px}
    ========================================= */
 
 @keyframes everyoneCamera {
-
   0% {
-
-    transform:
-      scale(1.12)
-      translate3d(0,0,0);
-
+    transform: scale(1.04) translate3d(0,0,0);
   }
 
   35% {
-
-    transform:
-      scale(1.08)
-      translate3d(-.7%,0,0);
-
+    transform: scale(1.02) translate3d(-.4%,0,0);
   }
 
   70% {
-
-    transform:
-      scale(1.11)
-      translate3d(.5%,-.5%,0);
-
+    transform: scale(1.04) translate3d(.3%,-.3%,0);
   }
 
   100% {
-
-    transform:
-      scale(1.07)
-      translate3d(0,.5%,0);
-
+    transform: scale(1.02) translate3d(0,.3%,0);
   }
-
 }
 
 
@@ -3027,6 +2990,426 @@ footer span{color:var(--rose);font-size:20px}
 
     font-size:
       22px !important;
+
+  }
+
+}
+/* =========================================
+   CINEMATIC PHOTO LIGHTBOX
+   ========================================= */
+
+.photo-lightbox {
+
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 9999;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 30px;
+
+  background:
+    rgba(8,4,10,.94);
+
+  backdrop-filter:
+    blur(18px);
+
+  -webkit-backdrop-filter:
+    blur(18px);
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  pointer-events: none;
+
+  transition:
+    opacity .45s ease,
+    visibility .45s ease;
+}
+
+
+.photo-lightbox.active {
+
+  opacity: 1;
+
+  visibility: visible;
+
+  pointer-events: auto;
+}
+
+
+/* =========================================
+   CLOSE BUTTON
+   ========================================= */
+
+.lightbox-close {
+
+  position: fixed;
+
+  top: 25px;
+
+  right: 30px;
+
+  z-index: 10001;
+
+  width: 48px;
+
+  height: 48px;
+
+  border: 1px solid
+    rgba(255,255,255,.20);
+
+  border-radius: 50%;
+
+  background:
+    rgba(255,255,255,.06);
+
+  color: white;
+
+  font-size: 32px;
+
+  line-height: 1;
+
+  cursor: pointer;
+
+  display: grid;
+
+  place-items: center;
+
+  transition:
+    transform .3s ease,
+    background .3s ease,
+    border-color .3s ease;
+}
+
+
+.lightbox-close:hover {
+
+  transform:
+    rotate(90deg)
+    scale(1.08);
+
+  background:
+    rgba(239,154,183,.15);
+
+  border-color:
+    rgba(239,154,183,.55);
+}
+
+
+/* =========================================
+   CONTENT
+   ========================================= */
+
+.lightbox-content {
+
+  width: min(1100px, 92vw);
+
+  max-height: 92vh;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 20px;
+}
+
+
+/* =========================================
+   IMAGE
+   ========================================= */
+
+.lightbox-image-wrap {
+
+  position: relative;
+
+  max-width: 100%;
+
+  max-height: 78vh;
+
+  overflow: hidden;
+
+  border-radius: 20px;
+
+  box-shadow:
+    0 40px 120px rgba(0,0,0,.60);
+
+  transform:
+    scale(.88)
+    translateY(20px);
+
+  opacity: 0;
+
+  transition:
+    transform .65s
+      cubic-bezier(.2,.8,.2,1),
+
+    opacity .5s ease;
+}
+
+
+.photo-lightbox.active
+.lightbox-image-wrap {
+
+  transform:
+    scale(1)
+    translateY(0);
+
+  opacity: 1;
+}
+
+
+.lightbox-image-wrap img {
+
+  display: block;
+
+  max-width: 100%;
+
+  max-height: 78vh;
+
+  width: auto;
+
+  height: auto;
+
+  object-fit: contain;
+}
+
+
+/* =========================================
+   IMAGE GLOW
+   ========================================= */
+
+.lightbox-image-wrap::after {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      120deg,
+      transparent 30%,
+      rgba(255,255,255,.12) 50%,
+      transparent 70%
+    );
+
+  transform:
+    translateX(-130%);
+
+  animation:
+    lightboxShine 4s ease-in-out infinite;
+}
+
+
+@keyframes lightboxShine {
+
+  0%, 50% {
+
+    transform:
+      translateX(-130%);
+
+  }
+
+  72% {
+
+    transform:
+      translateX(130%);
+
+  }
+
+  100% {
+
+    transform:
+      translateX(130%);
+
+  }
+
+}
+
+
+/* =========================================
+   CAPTION
+   ========================================= */
+
+.lightbox-caption {
+
+  text-align:
+    center;
+
+  max-width:
+    700px;
+
+  opacity:
+    0;
+
+  transform:
+    translateY(15px);
+
+  transition:
+    opacity .6s ease .3s,
+    transform .6s ease .3s;
+}
+
+
+.photo-lightbox.active
+.lightbox-caption {
+
+  opacity:
+    1;
+
+  transform:
+    translateY(0);
+}
+
+
+.lightbox-caption span {
+
+  display:
+    block;
+
+  color:
+    var(--rose);
+
+  font-size:
+    9px;
+
+  letter-spacing:
+    3px;
+
+  margin-bottom:
+    5px;
+}
+
+
+.lightbox-caption h3 {
+
+  margin:
+    0 0 6px;
+
+  font-family:
+    "Cormorant Garamond",
+    serif;
+
+  font-size:
+    32px;
+
+  font-style:
+    italic;
+
+  font-weight:
+    600;
+}
+
+
+.lightbox-caption p {
+
+  margin:
+    0;
+
+  color:
+    var(--muted);
+
+  font-size:
+    13px;
+
+  line-height:
+    1.6;
+}
+
+
+/* =========================================
+   CLICKABLE PHOTOS
+   ========================================= */
+
+.clickable-photo {
+
+  cursor:
+    zoom-in;
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media(max-width:520px) {
+
+  .photo-lightbox {
+
+    padding:
+      18px;
+
+  }
+
+  .lightbox-close {
+
+    top:
+      15px;
+
+    right:
+      15px;
+
+    width:
+      42px;
+
+    height:
+      42px;
+
+    font-size:
+      27px;
+
+  }
+
+  .lightbox-content {
+
+    width:
+      96vw;
+
+  }
+
+  .lightbox-image-wrap {
+
+    max-height:
+      72vh;
+
+    border-radius:
+      15px;
+
+  }
+
+  .lightbox-image-wrap img {
+
+    max-height:
+      72vh;
+
+  }
+
+  .lightbox-caption h3 {
+
+    font-size:
+      27px;
+
+  }
+
+  .lightbox-caption p {
+
+    font-size:
+      12px;
 
   }
 

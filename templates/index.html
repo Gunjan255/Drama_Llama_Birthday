@@ -594,5 +594,45 @@
   </main>
 
   <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+
+  <!-- =========================================
+     CINEMATIC PHOTO LIGHTBOX
+     ========================================= -->
+
+<div class="photo-lightbox" id="photoLightbox">
+
+  <button
+    class="lightbox-close"
+    id="lightboxClose"
+    aria-label="Close image"
+  >
+    ×
+  </button>
+
+  <div class="lightbox-content">
+
+    <div class="lightbox-image-wrap">
+
+      <img
+        id="lightboxImage"
+        src=""
+        alt=""
+      >
+
+    </div>
+
+    <div class="lightbox-caption">
+
+      <span id="lightboxNumber"></span>
+
+      <h3 id="lightboxTitle"></h3>
+
+      <p id="lightboxText"></p>
+
+    </div>
+
+  </div>
+
+</div>
 </body>
 </html>
