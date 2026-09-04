@@ -46,3 +46,154 @@ window.addEventListener("keydown",(e)=>{
     );
   }
 });
+/* =========================================
+   DRAMA LLAMA — LIVE BIRTHDAY CELEBRATION
+   ========================================= */
+
+const birthdayCelebration =
+  document.getElementById("birthdayCelebration");
+
+const closeCelebration =
+  document.getElementById("closeCelebration");
+
+const celebrateBtn =
+  document.getElementById("celebrateBtn");
+
+const confettiLayer =
+  document.getElementById("confettiLayer");
+
+
+/* Create confetti */
+
+function createConfetti(amount = 120) {
+
+  if (!confettiLayer) return;
+
+  confettiLayer.innerHTML = "";
+
+  const shapes = [
+    "●",
+    "◆",
+    "✦",
+    "♥",
+    "■"
+  ];
+
+  for (let i = 0; i < amount; i++) {
+
+    const piece =
+      document.createElement("span");
+
+    piece.className =
+      "confetti-piece";
+
+    piece.textContent =
+      shapes[
+        Math.floor(
+          Math.random() * shapes.length
+        )
+      ];
+
+    piece.style.left =
+      Math.random() * 100 + "%";
+
+    piece.style.setProperty(
+      "--duration",
+      3 + Math.random() * 3 + "s"
+    );
+
+    piece.style.setProperty(
+      "--delay",
+      Math.random() * 1.5 + "s"
+    );
+
+    piece.style.setProperty(
+      "--drift",
+      Math.random() * 250 - 125 + "px"
+    );
+
+    piece.style.fontSize =
+      7 + Math.random() * 10 + "px";
+
+    confettiLayer.appendChild(piece);
+  }
+
+  setTimeout(() => {
+
+    if (confettiLayer) {
+      confettiLayer.innerHTML = "";
+    }
+
+  }, 7000);
+}
+
+
+/* Start celebration */
+
+function startBirthdayCelebration() {
+
+  if (!birthdayCelebration) return;
+
+  birthdayCelebration.classList.remove(
+    "hidden"
+  );
+
+  createConfetti(140);
+
+  burstHearts(45);
+
+}
+
+
+/* Close celebration */
+
+function closeBirthdayCelebration() {
+
+  if (!birthdayCelebration) return;
+
+  birthdayCelebration.classList.add(
+    "hidden"
+  );
+
+}
+
+
+/* Automatically celebrate when she opens
+   the website */
+
+window.addEventListener(
+  "load",
+  () => {
+
+    setTimeout(() => {
+
+      startBirthdayCelebration();
+
+    }, 700);
+
+  }
+);
+
+
+/* Continue */
+
+if (closeCelebration) {
+
+  closeCelebration.addEventListener(
+    "click",
+    closeBirthdayCelebration
+  );
+
+}
+
+
+/* Celebrate again */
+
+if (celebrateBtn) {
+
+  celebrateBtn.addEventListener(
+    "click",
+    startBirthdayCelebration
+  );
+
+}

@@ -15,6 +15,84 @@
   <div class="noise"></div>
   <div id="hearts"></div>
 
+  <!-- Birthday Celebration -->
+<div class="birthday-celebration" id="birthdayCelebration">
+
+  <div class="celebration-glow"></div>
+
+  <!-- Floating balloons -->
+  <div class="birthday-balloon balloon-1">🎈</div>
+  <div class="birthday-balloon balloon-2">🎈</div>
+  <div class="birthday-balloon balloon-3">🎈</div>
+  <div class="birthday-balloon balloon-4">🎈</div>
+
+  <!-- Sparkles -->
+  <div class="sparkle sparkle-1">✦</div>
+  <div class="sparkle sparkle-2">✧</div>
+  <div class="sparkle sparkle-3">✦</div>
+  <div class="sparkle sparkle-4">✧</div>
+
+  <div class="birthday-stage">
+
+    <!-- Cake -->
+    <div class="animated-cake">
+
+      <div class="cake">
+        <div class="cake-icing"></div>
+        <div class="cake-body"></div>
+        <div class="cake-plate"></div>
+
+        <div class="candle candle-one">
+          <span class="flame"></span>
+        </div>
+
+        <div class="candle candle-two">
+          <span class="flame"></span>
+        </div>
+
+        <div class="candle candle-three">
+          <span class="flame"></span>
+        </div>
+      </div>
+
+      <p class="wish-text">Make a wish ✨</p>
+    </div>
+
+    <!-- Birthday message -->
+    <div class="birthday-message">
+
+      <p class="eyebrow">✨ A little birthday magic ✨</p>
+
+      <h2>
+        Happy Birthday,<br>
+        <em>{{ her_name }}</em> ❤️
+      </h2>
+
+      <p>
+        Today is officially a day for celebrating
+        the beautiful chaos that is you. 🦙❤️
+      </p>
+
+    </div>
+
+  </div>
+
+  <!-- Champagne -->
+  <div class="champagne champagne-left">🥂</div>
+  <div class="champagne champagne-right">🥂</div>
+
+  <!-- Confetti -->
+  <div id="confettiLayer"></div>
+
+  <button
+    class="close-celebration"
+    id="closeCelebration"
+    type="button">
+    Continue to your surprise ↓
+  </button>
+
+</div>
+
   <header class="nav">
     <div class="brand">D<span>♥</span>L</div>
     <div class="nav-date">{{ birthday }}</div>
@@ -31,7 +109,17 @@
         <h1>Happy Birthday,<br><em>{{ her_name }}</em> ❤️</h1>
         <p class="hero-line">Some people become a part of your life.<br>
           You somehow became a part of <strong>mine.</strong></p>
-        <button class="primary-btn" id="openBtn">Open your surprise <span>↓</span></button>
+        <div class="hero-buttons">
+
+  <button class="primary-btn" id="openBtn">
+    Open your surprise <span>↓</span>
+  </button>
+
+  <button class="celebrate-btn" id="celebrateBtn">
+    🎂 Celebrate again
+  </button>
+
+</div>
       </div>
     </section>
 
