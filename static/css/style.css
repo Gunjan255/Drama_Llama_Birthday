@@ -918,3 +918,390 @@ footer span{color:var(--rose);font-size:20px}
   }
 
 }
+/* =========================================
+   NEW MEMORIES — AMRITA
+   ========================================= */
+
+.new-memories {
+  position: relative;
+  overflow: hidden;
+}
+
+.new-memories .section-heading {
+  margin-bottom: 65px;
+}
+
+
+/* =========================
+   MEMORY GRID
+   ========================= */
+
+.new-memory-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  align-items: start;
+}
+
+
+/* =========================
+   MEMORY CARD
+   ========================= */
+
+.new-memory-card {
+  position: relative;
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.055),
+      rgba(255,255,255,.015)
+    );
+
+  border:
+    1px solid
+    rgba(255,255,255,.10);
+
+  border-radius: 28px;
+
+  padding: 12px;
+
+  box-shadow:
+    0 25px 70px rgba(0,0,0,.25);
+
+  transition:
+    transform .6s cubic-bezier(.2,.8,.2,1),
+    box-shadow .6s ease;
+}
+
+
+/* =========================
+   PHOTO
+   ========================= */
+
+.new-memory-photo {
+  position: relative;
+
+  overflow: hidden;
+
+  border-radius: 20px;
+
+  background: #211321;
+
+  aspect-ratio: 4 / 5;
+}
+
+
+.new-memory-photo img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  display: block;
+
+  transform:
+    scale(1.04);
+
+  filter:
+    saturate(.9)
+    brightness(.92);
+
+  transition:
+    transform 1s cubic-bezier(.2,.8,.2,1),
+    filter 1s ease;
+}
+
+
+/* =========================
+   HOVER
+   ========================= */
+
+.new-memory-card:hover {
+  transform:
+    translateY(-10px);
+
+  box-shadow:
+    0 35px 90px rgba(0,0,0,.40);
+}
+
+
+.new-memory-card:hover img {
+  transform:
+    scale(1.10);
+
+  filter:
+    saturate(1.05)
+    brightness(1);
+}
+
+
+/* =========================
+   LIGHT SHINE
+   ========================= */
+
+.memory-shine {
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      120deg,
+      transparent 30%,
+      rgba(255,255,255,.16) 50%,
+      transparent 70%
+    );
+
+  transform:
+    translateX(-130%);
+
+  transition:
+    transform 1s ease;
+}
+
+
+.new-memory-card:hover .memory-shine {
+  transform:
+    translateX(130%);
+}
+
+
+/* =========================
+   TEXT
+   ========================= */
+
+.new-memory-text {
+  padding:
+    24px 10px
+    18px;
+}
+
+
+.new-memory-text span {
+  display: block;
+
+  color:
+    var(--rose);
+
+  font-size:
+    10px;
+
+  letter-spacing:
+    2px;
+
+  margin-bottom:
+    7px;
+}
+
+
+.new-memory-text h3 {
+  margin:
+    0 0 9px;
+
+  font-family:
+    "Cormorant Garamond",
+    serif;
+
+  font-size:
+    34px;
+
+  font-weight:
+    600;
+
+  font-style:
+    italic;
+
+  line-height:
+    1;
+}
+
+
+.new-memory-text p {
+  margin:
+    0;
+
+  color:
+    var(--muted);
+
+  font-size:
+    13px;
+
+  line-height:
+    1.7;
+}
+
+
+/* =========================
+   SCROLL ANIMATIONS
+   ========================= */
+
+.new-memory-card {
+  opacity: 0;
+
+  transform:
+    translateY(55px)
+    scale(.97);
+
+  transition:
+    opacity .9s ease,
+    transform 1s cubic-bezier(.2,.8,.2,1),
+    box-shadow .6s ease;
+}
+
+
+.new-memories.visible
+.new-memory-card {
+  opacity: 1;
+
+  transform:
+    translateY(0)
+    scale(1);
+}
+
+
+/* Different entrance timing */
+
+.new-memories.visible
+.memory-pub {
+  transition-delay:
+    .10s;
+}
+
+
+.new-memories.visible
+.memory-wings {
+  transition-delay:
+    .28s;
+}
+
+
+.new-memories.visible
+.memory-saree {
+  transition-delay:
+    .46s;
+}
+
+
+/* Keep hover transform after appearing */
+
+.new-memories.visible
+.new-memory-card:hover {
+  transform:
+    translateY(-10px)
+    scale(1.01);
+}
+
+
+/* =========================
+   SPECIAL PHOTO EFFECTS
+   ========================= */
+
+/* Pub — cinematic */
+
+.memory-pub img {
+  filter:
+    saturate(.82)
+    contrast(1.04)
+    brightness(.88);
+
+  transition:
+    transform 1.2s ease,
+    filter 1.2s ease;
+}
+
+
+.memory-pub:hover img {
+  filter:
+    saturate(1)
+    contrast(1.05)
+    brightness(1);
+}
+
+
+/* Wings — magical */
+
+.memory-wings img {
+  filter:
+    saturate(1.05)
+    brightness(.90);
+
+  transition:
+    transform 1.2s ease,
+    filter 1.2s ease;
+}
+
+
+.memory-wings:hover img {
+  filter:
+    saturate(1.18)
+    brightness(1.05);
+}
+
+
+/* Saree — soft elegance */
+
+.memory-saree img {
+  filter:
+    saturate(.82)
+    brightness(.97);
+
+  transition:
+    transform 1.2s ease,
+    filter 1.2s ease;
+}
+
+
+.memory-saree:hover img {
+  filter:
+    saturate(1)
+    brightness(1.04);
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media(max-width:850px) {
+
+  .new-memory-grid {
+    grid-template-columns:
+      1fr 1fr;
+
+    gap:
+      18px;
+  }
+
+  .new-memory-card:first-child {
+    grid-column:
+      1 / -1;
+  }
+
+}
+
+
+@media(max-width:520px) {
+
+  .new-memory-grid {
+    grid-template-columns:
+      1fr;
+
+    gap:
+      25px;
+  }
+
+  .new-memory-card:first-child {
+    grid-column:
+      auto;
+  }
+
+  .new-memory-text h3 {
+    font-size:
+      31px;
+  }
+
+}
