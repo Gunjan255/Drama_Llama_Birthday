@@ -25,8 +25,26 @@ body{
 .heart{position:absolute;font-size:20px;animation:float 4.8s ease-out forwards;opacity:0}
 @keyframes float{0%{transform:translateY(30px) scale(.6);opacity:0}15%{opacity:1}100%{transform:translateY(-95vh) translateX(var(--drift)) rotate(25deg) scale(1.2);opacity:0}}
 .nav{height:78px;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;border-bottom:1px solid var(--line);position:relative;z-index:10}
-.brand{font-family:"Cormorant Garamond",serif;font-size:28px;letter-spacing:3px}
-.brand span{font-size:18px;margin:0 5px;color:var(--rose)}
+.brand{
+  font-family:"Cormorant Garamond",serif;
+  font-size:30px;
+  font-weight:600;
+  font-style:italic;
+  letter-spacing:1.5px;
+  color:#fff;
+  white-space:nowrap;
+  text-shadow:
+    0 0 8px rgba(255,255,255,.45),
+    0 0 18px rgba(239,154,183,.35);
+  transition:all .3s ease;
+}
+
+.brand:hover{
+  transform:translateY(-1px);
+  text-shadow:
+    0 0 10px rgba(255,255,255,.7),
+    0 0 22px rgba(239,154,183,.55);
+}
 .nav-date{font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--muted)}
 main{max-width:1500px;margin:auto}
 .hero{min-height:calc(100vh - 78px);display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:7vw;padding:7vw 7vw 9vw}
