@@ -2,6 +2,22 @@ const openBtn = document.getElementById("openBtn");
 const heartLayer = document.getElementById("hearts");
 const birthdaySong = document.getElementById("birthdaySong");
 
+async function playLaavan() {
+  if (!birthdaySong) {
+    console.error("❌ birthdaySong element not found");
+    return;
+  }
+
+  try {
+    birthdaySong.currentTime = 0;
+    birthdaySong.volume = 1.0;
+    await birthdaySong.play();
+    console.log("🎵 Laavan started successfully!");
+  } catch (error) {
+    console.error("❌ Laavan failed:", error);
+  }
+}
+
 const birthdayCelebration =
   document.getElementById("birthdayCelebration");
 
@@ -19,7 +35,7 @@ const confettiLayer =
 // LAAVAN MUSIC
 // =========================================
 
-function playLaavan() {
+async function playLaavan() {
 
   if (!birthdaySong) {
     console.error("❌ birthdaySong not found");
@@ -51,23 +67,18 @@ function playLaavan() {
 
 if (closeCelebration) {
 
-  closeCelebration.addEventListener("click", function () {
+  closeCelebration.addEventListener("click", async function () {
 
     console.log("❤️ Continue button clicked");
 
-    // IMPORTANT:
-    // This is directly inside the user's click.
-    playLaavan();
+    await playLaavan();
 
-    // Hide birthday animation
     if (birthdayCelebration) {
       birthdayCelebration.classList.add("hidden");
     }
 
-    // Start hearts
     burstHearts(28);
 
-    // Notify Flask
     fetch("/heartbeat", {
       method: "POST"
     }).catch(() => {});
