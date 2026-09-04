@@ -3,9 +3,57 @@ const openBtn = document.getElementById("openBtn");
 const heartLayer = document.getElementById("hearts");
 const birthdaySong = document.getElementById("birthdaySong");
 
-openBtn.addEventListener("click", async () => {
-  document.querySelector(".intro").scrollIntoView({behavior:"smooth"});
-  burstHearts(28);
+
+// =========================================
+// START LAAVAN
+// =========================================
+
+async function startBirthdaySong() {
+
+  if (!birthdaySong) {
+    console.log("❌ birthdaySong element not found");
+    return;
+  }
+
+  try {
+
+    birthdaySong.volume = 1.0;
+
+    await birthdaySong.play();
+
+    console.log("🎵 Laavan is playing!");
+
+  } catch (error) {
+
+    console.error("❌ Laavan could not start:", error);
+
+  }
+}
+
+
+// =========================================
+// MAIN WEBSITE OPEN BUTTON
+// =========================================
+
+if (openBtn) {
+
+  openBtn.addEventListener("click", async () => {
+
+    document
+      .querySelector(".intro")
+      .scrollIntoView({behavior:"smooth"});
+
+    burstHearts(28);
+
+    await startBirthdaySong();
+
+    fetch("/heartbeat", {
+      method:"POST"
+    }).catch(()=>{});
+
+  });
+
+}
 
   if (birthdaySong) {
     try {
@@ -154,15 +202,19 @@ function startBirthdayCelebration() {
 }
 
 
-/* Close celebration */
+async function closeBirthdayCelebration() {
 
-function closeBirthdayCelebration() {
+  // Start Laavan because this function is triggered
+  // directly by her button click.
+  await startBirthdaySong();
 
   if (!birthdayCelebration) return;
 
-  birthdayCelebration.classList.add(
-    "hidden"
-  );
+  birthdayCelebration.classList.add("hidden");
+
+  fetch("/heartbeat", {
+    method: "POST"
+  }).catch(() => {});
 
 }
 
