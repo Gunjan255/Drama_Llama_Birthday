@@ -1,13 +1,22 @@
 
 const openBtn = document.getElementById("openBtn");
 const heartLayer = document.getElementById("hearts");
+const birthdaySong = document.getElementById("birthdaySong");
 
-openBtn.addEventListener("click", () => {
+openBtn.addEventListener("click", async () => {
   document.querySelector(".intro").scrollIntoView({behavior:"smooth"});
   burstHearts(28);
+
+  if (birthdaySong) {
+    try {
+      await birthdaySong.play();
+    } catch (error) {
+      console.log("Laavan could not start:", error);
+    }
+  }
+
   fetch("/heartbeat", {method:"POST"}).catch(()=>{});
 });
-
 function burstHearts(count){
   for(let i=0;i<count;i++){
     const h=document.createElement("span");
